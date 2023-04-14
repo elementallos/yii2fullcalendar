@@ -1,6 +1,6 @@
 {
-	"name": "philippfrenzel/yii2fullcalendar",
-	"description": "Yii2 fullcalendar Widgets",
+	"name": "yetopen/yii2fullcalendar",
+	"description": "Yii2 fullcalendar widget (fork)",
 	"keywords": ["yii2", "fullcalendar","widget"],
 	"homepage": "http://www.frenzel.net/",
 	"type": "yii2-extension",
@@ -14,7 +14,7 @@
 		}
 	],
 	"support": {
-		"source": "https://github.com/philippfrenzel/yii2fullcalendar"
+		"source": "https://github.com/yetopen/yii2fullcalendar"
 	},
 	"minimum-stability": "stable",
 	"require": {
@@ -39,6 +39,10 @@
 	},
 	"conflict": {
 		"bower-asset/fullcalendar": "^4.3.0"
+	},
+	"replace": {
+		"yetopen/yii2fullcalendar-scheduler": "*",
+		"philippfrenzel/yii2fullcalendar-scheduler": "*"
 	},
 	"autoload": {
 		"psr-4": { "yii2fullcalendar\\": "" }

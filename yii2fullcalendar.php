@@ -12,6 +12,7 @@ namespace yii2fullcalendar;
 
 use Yii;
 use yii\web\View;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\JsExpression;
@@ -37,7 +38,6 @@ class yii2fullcalendar extends elWidget
     /**
      * @var the name of the theme how the calendar should be displayed. default bootstrap 3
      * Available Options
-     * 
      */
     public $themeSystem = 'bootstrap3';
 
@@ -46,8 +46,9 @@ class yii2fullcalendar extends elWidget
      */
     public $clientOptions = [
         'weekends' => true,
+        'default' => 'month',
         'editable' => false,
-        'aspectRatio' => 1.35
+        'initialView' => 'dayGridMonth',
     ];
 
     /**
@@ -73,9 +74,9 @@ class yii2fullcalendar extends elWidget
      * @var array header format
      */
     public $header = [
+        'start' => 'prev,next today',
         'center' => 'title',
-        'left' => 'prev,next today',
-        'right' => 'month,agendaWeek'
+        'end' => 'dayGridMonth,timeGridWeek',
     ];
 
     /**
@@ -250,38 +251,18 @@ class yii2fullcalendar extends elWidget
             $this->clientOptions['customButtons'] = $this->customButtons;
         }
 
-        if (is_array($this->header) && isset($this->clientOptions['header'])) {
-            $this->clientOptions['header'] = array_merge($this->header, $this->clientOptions['header']);
-        } else {
-            $this->clientOptions['header'] = $this->header;
-        }
+        $this->clientOptions['headerToolbar'] = ArrayHelper::merge($this->headerToolbar, ArrayHelper::getValue($this->clientOptions, 'headerToolbar', []));
 
         if (isset($this->defaultView) && !isset($this->clientOptions['defaultView'])) {
             $this->clientOptions['defaultView'] = $this->defaultView;
         }
 
-        // clear existing calendar display before rendering new fullcalendar instance
-        // this step is important when using the fullcalendar widget with pjax
-        $js[] = "var loading_container = jQuery('#$id .fc-loading');"; // take backup of loading container
-        $js[] = "jQuery('#$id').empty().append(loading_container);"; // remove/empty the calendar container and append loading container bakup
-
         $cleanOptions = $this->getClientOptions();
-        $js[] = "jQuery('#$id').fullCalendar($cleanOptions);";
-
-        /**
-         * Loads events separately from the calendar creation. Uncomment if you need this functionality.
-         *
-         * lets check if we have an event for the calendar...
-         * if(is_array($this->events))
-         * {
-         *    foreach($this->events AS $event)
-         *    {
-         *        $jsonEvent = Json::encode($event);
-         *        $isSticky = $this->stickyEvents;
-         *        $js[] = "jQuery('#$id').fullCalendar('renderEvent',$jsonEvent,$isSticky);";
-         *    }
-         * }
-         */
+        $js[] = <<<EOCALENDAR
+var calendarEl = document.getElementById('$id');
+var calendar = new FullCalendar.Calendar(calendarEl, $cleanOptions);
+calendar.render();
+EOCALENDAR;
 
         $view->registerJs(implode("\n", $js), View::POS_READY);
     }
@@ -336,6 +317,8 @@ class yii2fullcalendar extends elWidget
         if (is_array($this->events) || is_string($this->events)) {
             $options['events'] = $this->events;
         }
+        // This translates string only, won't set button strings https://stackoverflow.com/q/76016732/738852
+        $options["locale"] = substr(Yii::$app->language, 0, 2);
 
         $options = array_merge($options, $this->clientOptions);
         return Json::encode($options);
