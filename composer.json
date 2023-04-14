@@ -18,8 +18,7 @@
 	},
 	"minimum-stability": "stable",
 	"require": {
-		"yiisoft/yii2": "*",
-		"yiisoft/yii-jquery" : "*"
+		"yiisoft/yii2": "*"
 	},
 	"require-dev": {
 		"codeception/codeception": "*"
