@@ -73,7 +73,7 @@ class yii2fullcalendar extends elWidget
      * Define the look n feel for the calendar header, known placeholders are left, center, right
      * @var array header format
      */
-    public $header = [
+    public $headerToolbar = [
         'start' => 'prev,next today',
         'center' => 'title',
         'end' => 'dayGridMonth,timeGridWeek',
