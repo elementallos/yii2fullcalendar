@@ -19,9 +19,7 @@
 	"minimum-stability": "stable",
 	"require": {
 		"yiisoft/yii2": "*",
-		"yiisoft/yii-jquery" : "*",
-		"bower-asset/fullcalendar": "4.0.2",
-		"bower-asset/fullcalendar-scheduler" : "4.0.1@stable"
+		"yiisoft/yii-jquery" : "*"
 	},
 	"require-dev": {
 		"codeception/codeception": "*"
