@@ -26,6 +26,7 @@ class CoreAsset extends AssetBundle
         // embedding assets in the extension
         // https://github.com/fullcalendar/fullcalendar/issues/4566
         'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js',
+        'https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.5/locales-all.global.min.js',
     ];
 
     /**
