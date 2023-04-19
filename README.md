@@ -1,49 +1,37 @@
-yii2fullcalendar
-================
-JQuery Fullcalendar Yii2 Extension
-JQuery from: http://arshaw.com/fullcalendar/
-Version 4.0.2
+# yii2fullcalendar
+
+Fullcalendar extension for Yii2 * https://github.com/fullcalendar/fullcalendar
+
+Uses Fullcalendar v6 assets **from CDN**.
 License MIT
 
-JQuery Documentation:
-http://arshaw.com/fullcalendar/docs/
-Yii2 Extension by <philipp@frenzel.net>
+This is a small update using v6 calendar. It's stil a *draft*, as not all features have been implemented, but it's working.
+Feel free to open PRs for improvements.
 
-A tiny sample can be found here:
-http://yii2fullcalendar.beeye.org
+Originally developed by philipp@frenzel.net.
 
-[![Latest Stable Version](https://poser.pugx.org/philippfrenzel/yii2fullcalendar/v/stable.svg)](https://packagist.org/packages/philippfrenzel/yii2fullcalendar)
-[![Build Status](https://travis-ci.org/philippfrenzel/yii2fullcalendar.svg?branch=master)](https://travis-ci.org/philippfrenzel/yii2fullcalendar)
-[![Code Climate](https://codeclimate.com/github/philippfrenzel/yii2fullcalendar.png)](https://codeclimate.com/github/philippfrenzel/yii2fullcalendar)
-[![License](https://poser.pugx.org/philippfrenzel/yii2fullcalendar/license.svg)](https://packagist.org/packages/philippfrenzel/yii2fullcalendar)
+## Installation
 
-Installation
-============
 Package is although registered at packagist.org - so you can just add one line of code, to let it run!
 
 add the following line to your composer.json require section:
 ```json
-  "philippfrenzel/yii2fullcalendar":"*",
+  "yetopen/yii2fullcalendar":"*",
 ```
 
 or run:
 ```
-$ php composer.phar require philippfrenzel/yii2fullcalendar "*"
+$ php composer.phar require yetopen/yii2fullcalendar "*"
 ```
 
-And ensure, that you have the following plugin installed global:
+## Changelog
 
-> php composer.phar global require "fxp/composer-asset-plugin:~1.0"
+2023.04.19 Updated to use v6 library
+2019.04.17 Updated to latest 4.0.2 Stable Version of the library
+2017.01.19 Updated to include non-standard fields
+2014.11.29 Updated to latest 2.2.3 Version of the library
 
-Changelog
----------
-
-17-04-2019 Updated to latest 4.0.2 Stable Version of the library
-19-01-2017 Updated to include non-standard fields
-29-11-2014 Updated to latest 2.2.3 Version of the library
-
-Usage
-=====
+## Usage
 
 Quickstart Looks like this:
 
@@ -76,15 +64,14 @@ Quickstart Looks like this:
 
 Note, that this will only view the events without any detailed view or option to add a new event.. etc.
 
-Non-Standard fields
-===================
+## Non-Standard fields
 
 You can add non-standard fields via the non-standard fields array, for which you can pass any key/value pair, as described in the [Event Fields](https://fullcalendar.io/docs/event_data/Event_Object/) documentation.
 
 So, using the Quick Start example above, you can read `field1` and `fields2` in your JavaScript using notation similar to `event.nonstandard.field1` and `event.nonstandard.field2`.
 
-AJAX Usage
-==========
+## AJAX Usage
+
 If you wanna use ajax loader, this could look like this:
 
 # 20171023 ajaxEvents are replaced by events - pls. check fullcalendar io documentation for details

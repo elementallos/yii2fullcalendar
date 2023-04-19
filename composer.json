@@ -1,6 +1,6 @@
 {
 	"name": "yetopen/yii2fullcalendar",
-	"description": "Yii2 fullcalendar Widgets",
+	"description": "Yii2 fullcalendar widget (fork)",
 	"keywords": ["yii2", "fullcalendar","widget"],
 	"homepage": "http://www.frenzel.net/",
 	"type": "yii2-extension",
@@ -11,6 +11,10 @@
 			"email": "philipp@frenzel.net",
 			"homepage": "http://www.frenzel.net/",
 			"role": "Developer"
+		},
+		{
+			"name": "Lorenzo Milesi",
+			"email": "maxxer@yetopen.com"
 		}
 	],
 	"support": {
@@ -18,10 +22,7 @@
 	},
 	"minimum-stability": "stable",
 	"require": {
-		"yiisoft/yii2": "*",
-		"yiisoft/yii-jquery" : "*",
-		"bower-asset/fullcalendar": "4.0.2",
-		"bower-asset/fullcalendar-scheduler" : "4.0.1@stable"
+		"yiisoft/yii2": "*"
 	},
 	"require-dev": {
 		"codeception/codeception": "*"
@@ -39,6 +40,10 @@
 	},
 	"conflict": {
 		"bower-asset/fullcalendar": "^4.3.0"
+	},
+	"replace": {
+		"yetopen/yii2fullcalendar-scheduler": "*",
+		"philippfrenzel/yii2fullcalendar-scheduler": "*"
 	},
 	"autoload": {
 		"psr-4": { "yii2fullcalendar\\": "" }
