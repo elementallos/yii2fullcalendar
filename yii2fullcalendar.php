@@ -11,6 +11,8 @@
 namespace yii2fullcalendar;
 
 use Yii;
+use yii\helpers\Console;
+use yii\helpers\Inflector;
 use yii\web\View;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -173,20 +175,30 @@ class yii2fullcalendar extends elWidget
     public $select = "";
 
     /**
+     * The global variable name for the widget (used for update/filter calendar events)
+     * @var string valid JS variable name
+     */
+    public $jsGlobalVar;
+
+    /**
      * Initializes the widget.
      * If you override this method, make sure you call the parent implementation first.
      */
     public function init()
     {
         //checks for the element id
+        $this->setId(null);
         if (!isset($this->options['id'])) {
-            $this->options['id'] = $this->getId();
+            $this->options['id'] = 'CalendarTasks';
         }
         //checks for the class
         if (!isset($this->options['class'])) {
             $this->options['class'] = 'fullcalendar';
         }
 
+        $this->jsGlobalVar = Inflector::id2camel($this->options['id']) . '_' . $this->id;
+        $this->options['id'] = $this->jsGlobalVar;
+        $this->view->registerJsVar($this->jsGlobalVar, 'undefined');
         parent::init();
     }
 
@@ -259,9 +271,9 @@ class yii2fullcalendar extends elWidget
 
         $cleanOptions = $this->getClientOptions();
         $js[] = <<<EOCALENDAR
-var calendarEl = document.getElementById('$id');
-var calendar = new FullCalendar.Calendar(calendarEl, $cleanOptions);
-calendar.render();
+let calendarEl = document.getElementById('$id');
+$this->jsGlobalVar = new FullCalendar.Calendar(calendarEl, $cleanOptions);
+$this->jsGlobalVar.render();
 EOCALENDAR;
 
         $view->registerJs(implode("\n", $js), View::POS_READY);
@@ -324,3 +336,4 @@ EOCALENDAR;
         return Json::encode($options);
     }
 }
+
